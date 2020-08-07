@@ -17,7 +17,9 @@ using namespace yi::react;
 
 #define TAG "MyNetworkingModule"
 
+#if defined(YI_ANDROID)
 extern JNIEnv *GetEnv();
+#endif
 
 static const std::string DID_COMPLETE_NETWORK_RESPONSE_EVENT = "didCompleteNetworkResponse";
 static const std::string DID_RECEIVE_NETWORK_RESPONSE_EVENT = "didReceiveNetworkResponse";
@@ -146,6 +148,7 @@ static CYIString GetResponseData(const std::shared_ptr<CYIHTTPResponse> &pRespon
     }
 }
 
+#if defined(YI_ANDROID)
 static void NoticeHttpTransaction() {
     JNIEnv *pEnv = GetEnv();
     jclass bridgeClass = pEnv->FindClass("tv/youi/NewRelicBridge");
@@ -153,6 +156,7 @@ static void NoticeHttpTransaction() {
     pEnv->CallStaticVoidMethod(bridgeClass, methodID);
     YI_LOGD(TAG, "Calling sampleNoticeHttpTransaction from Cpp");
 }
+#endif
 
 YI_RN_INSTANTIATE_MODULE(MyNetworkingModule, EventEmitterModule);
 
