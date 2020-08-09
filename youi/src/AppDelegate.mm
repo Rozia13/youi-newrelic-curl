@@ -5,13 +5,17 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
+#import <NewRelicAgent/NewRelic.h>
+
 #define LOG_TAG "AppDelegate"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey,id> *)launchOptions {
-[NewRelic enableFeatures:NRFeatureFlag_NetworkRequestEvents | NRFeatureFlag_NSURLSessionInstrumentation | NRFeatureFlag_RequestErrorEvents | NRFeatureFlag_HttpResponseBodyCapture];
-    [NewRelicAgent startWithApplicationToken:@"AA216ffa362de5f23adaec2ab8c09d1db36102ea91"];
+    [NewRelic enableFeatures:NRFeatureFlag_NetworkRequestEvents | NRFeatureFlag_NSURLSessionInstrumentation | NRFeatureFlag_RequestErrorEvents | NRFeatureFlag_HttpResponseBodyCapture];
+       [NewRelicAgent startWithApplicationToken:@"AA662f1e28999aa0681eb791431280129167a15886-NRMA"];
+    return [super application:application didFinishLaunchingWithOptions:launchOptions];
+    return true;
     }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application{
